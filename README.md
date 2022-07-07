@@ -115,7 +115,7 @@ See what is available already in the application.
 - What views (pages, components) are available?
 header, footer, index, edit, show, new, home, notfound
 
-## 🏡 Apartment Resource
+## 🏡 Apartment Resource √
 The Devise User model is going to have an association with the Apartment model. In this situation, the User will have many apartments and the Apartments will belong to a User.
 
 ```bash
@@ -242,7 +242,13 @@ registrations
 passwords
 
 
-## branch: environment √
+## 1) branch: environment √
+> Modified the application.html.erb because it is a template of the app that every view/page will render
+
+> It grabs every single page and yields it html
+
+> partials used on this file will point to where the information lives
+
 ```ruby
 #  app/views/layouts/application.html.erb
 <title>TreeHouse</title>
@@ -291,4 +297,98 @@ HEADER GOES HERE....
   <li class="nav-item">
     <%= link_to 'About Us', home_about_path, class:"nav-link" %>
   </li>
+```
+
+## 2) branch: rails-crud
+- reference syllabus https://github.com/learn-academy-2022-charlie/Syllabus/blob/main/rails/generate-resource.md
+- FORGOT to make associations as stated in stubbed README, ideally do this after generating resource
+- since ran resource only need to create controller in rails and views will be handled by react pages/components using fetch requests
+```ruby
+# app/controllers/application_controller.rb
+  skip_before_action :verify_authenticity_token
+
+# index method
+  def index
+    apartments = Apartment.all
+    render json: apartments
+  end
+
+# rails c
+# make sure logged in so you don't have to create a user
+user1 = User.find 1
+user1.apartments.create street: "Fake Street", city: "Fake City", state: "FS", manager: "Manny Fake", email: "fake.email.com", price: "$1000/day", bedrooms: 0, bathrooms: 0, pets: "imaginary", image: "https://live.staticflickr.com/1323/660567985_0588581de2_b.jpg"
+
+# Check browser
+http://localhost:3000/apartments
+
+# show method, create a show.html.erb on apartment view
+  def show
+    apartment = Apartment.find([params[:id]])
+    render json: apartment
+  end
+
+# add a another entry
+user1.apartments.create street: "Another Fake Street", city: "Another Fake City", state: "FS", manager: "Fanny Fake", email: "aint.email.com", price: "$1050/week", bedrooms: 2, bathrooms: 1, pets: "only air", image: "https://upload.wikimedia.org/wikipedia/commons/d/de/View_from_Pagatpat_tree_house_-_panoramio_%281%29.jpg"
+
+# Check browser
+http://localhost:3000/apartments/2
+
+# create method
+  def create
+    apartment = Apartment.create(apartment_params)
+    if apartment.valid?
+      render json: apartment
+    else
+      render json: apartment.errors
+    end
+  end
+
+  private
+  def apartment_params
+    params.require(:apartment).permit(:street, :city, :state, :manager, :email, :price, :bedrooms, :bathrooms, :pets, :image)
+  end
+
+# Postman error states {"user":["must exist"]}
+POST http://localhost:3000/apartments
+{
+    "street": "That Phony Street", 
+    "city": "Phony City", 
+    "state": "PS", 
+    "manager": "Phony Phil", 
+    "email": "aint.email.com", 
+    "price": "$150/hr", 
+    "bedrooms": 1, 
+    "bathrooms": 1, 
+    "pets": "only air", 
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/de/View_from_Pagatpat_tree_house_-_panoramio_%281%29.jpg"
+}
+# Will modify devise user method, Need to review Wildlife Tracker project for research on devise user, all other endpoints work on Postman
+
+# update method
+  def update
+    apartment = Apartment.find(params[:id])
+    apartment.update(apartment_params)
+    render json: apartment
+  end
+
+# destroy method
+  def destroy
+    apartment = Apartment.find(params[:id])
+    apartment.destroy
+    render json: apartment
+  end
+
+# testing in spec/models/apartment_spec.rb
+  let(:user) { 
+    User.create email: 'fake@email.com', password: '123456', password_confirmation: '123456' 
+  }
+
+    it 'should have a valid street' do
+    apt = Apartment.create city: "Another Fake City", state: "FS", manager: "Fanny Fake", email: "aint.email.com", price: "$1050/week", bedrooms: 2, bathrooms: 1, pets: "only air", image: "https://upload.wikimedia.org/wikipedia/commons/d/de/View_from_Pagatpat_tree_house_-_panoramio_%281%29.jpg", user_id: user.id
+    expect(apt.errors[:street]).to include "can't be blank"
+  end
+
+# add notice and alert to application view
+      <p class="notice"> <%= notice %> </p>
+      <p class="alert"> <%= alert %> </p>
 ```
