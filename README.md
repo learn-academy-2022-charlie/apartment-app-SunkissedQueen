@@ -299,7 +299,7 @@ HEADER GOES HERE....
   </li>
 ```
 
-## 2) branch: rails-crud
+## 2) branch: rails-crud √
 - reference syllabus https://github.com/learn-academy-2022-charlie/Syllabus/blob/main/rails/generate-resource.md
 - FORGOT to make associations as stated in stubbed README, ideally do this after generating resource
 - since ran resource only need to create controller in rails and views will be handled by react pages/components using fetch requests
@@ -392,3 +392,27 @@ POST http://localhost:3000/apartments
       <p class="notice"> <%= notice %> </p>
       <p class="alert"> <%= alert %> </p>
 ```
+
+## 3) branch: devise
+```ruby
+# conditional rendering in home view
+<% if user_signed_in? %>
+  <li class="nav-item">
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"nav-link" %>
+  </li> 
+  <li class="nav-item">
+    <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link" %>
+  </li>
+  <li class="nav-item">
+  <%= link_to 'Tree Houses', apartments_path, class:"nav-link" %>
+  </li> 
+<% else %>
+  <li class="nav-item">
+    <%= link_to 'Sign Up', new_user_registration_path, class:"nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Sign In', new_user_session_path, class:"nav-link" %>
+  </li>
+<% end %>
+```
+- $ rails g devise:views
