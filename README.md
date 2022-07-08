@@ -473,3 +473,92 @@ config.scoped_views = true
   - Add class:"form-control", placeholder:"message"
   - For the check_box, add form-check and class:"form-control"
 
+## 4) branch: mock-apt
+- Add a file to javascript called mockApartments.js 
+```javascript
+let apartments = [
+  {
+    id: 1,
+    street: "Another Fake Street", 
+    city: "Another Fake City", 
+    state: "FS", 
+    manager: "Fanny Fake", 
+    email: "aint.email.com", 
+    price: "$1050/week", 
+    bedrooms: 2, 
+    bathrooms: 1, 
+    pets: "only air", 
+    image: "https://upload.wikimedia.org/wikipedia/commons/d/de/View_from_Pagatpat_tree_house_-_panoramio_%281%29.jpg", 
+    user_id: 1
+  }
+]
+
+export default apartments
+
+// import and updates on App.js
+import mockApartments from './mockApartments.js'
+
+class App extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      apartments: mockApartments
+    }
+  }
+
+<Route path="/apartmentindex" render={(props) => <ApartmentIndex apartments={this.state.apartments} />} />
+
+// Modify ApartmentIndex
+import { Card, CardTitle, Col } from 'reactstrap'
+
+<h3> For currency there is vacancy!</h3>
+<br />
+  {this.props.apartments.map(apartment => {
+    return(
+      <CardGroup>
+      <Card body key={apartment.id}>
+          <CardImg
+            alt="Card image cap"
+            src="https://picsum.photos/318/180"
+            top
+            width="100%"
+          />
+          <CardBody>
+            <CardTitle tag="h5">
+              <h4>{apartment.street}</h4>
+              <h4>{apartment.city, apartment.state}</h4>
+            </CardTitle>
+            <CardSubtitle
+              className="mb-2 text-muted"
+              tag="h6"
+            >
+              Card subtitle
+            </CardSubtitle>
+            <CardText>
+              This card has supporting text below as a natural lead-in to additional content.
+            </CardText>
+            <Button>
+              Button
+            </Button>
+          </CardBody>
+        </Card>
+      </CardGroup>
+    )
+  })}
+
+// Modify App.js and Show
+<Route path="/apartmentshow/:id" render={(props) => {
+  let id = props.match.params.id
+  let apartment = this.state.apartments.find(apartment => apartment.id === +id)
+  return <ApartmentShow apartment={apartment} />
+}} />
+
+<Col sm="6">
+  <Card body>
+    <CardTitle>Hi, my name is {this.props.apartment.name}!</CardTitle>
+    <img src={this.props.apartment.image} alt="adorable apartment" />
+    <CardText>I am {this.props.apartment.age} years old. I enjoy  {this.props.apartment.enjoys}.</CardText>
+  </Card>
+</Col>
+```
+
