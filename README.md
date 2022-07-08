@@ -216,6 +216,30 @@ end
 - To quickly refresh webpacker in an additional tab run: $ ./bin/webpack-dev-server
 - Option + V will create a checkmark to areas that I completed
 
+## Error Messages
+```
+Error: Cannot find module '../assets/treelogo.png'
+    at webpackMissingModule (Footer.test.js:22:1)
+    ReferenceError: App is not defined
+    at eval (eval at ./node_modules/react_ujs/react_ujs/src/getConstructor/fromGlobal.js.module.exports
+```
+- Got that error after improper path to image
+- ../../ to show the levels that needed to go to retrieve images in the javascript folder
+
+## Loading images√
+- in javascript/assets
+  - import treelogo from '../../assets/treelogo.png'
+  - <img src={treelogo} alt="Logo" height="35" width="auto"/>
+- app/assets/images and referenced in views
+  - <%= image_tag "treelogo.png", height: 50 %>
+- application.scss
+```css
+body {
+  background: image-url('lighter.png') repeat center fixed;
+  background-size: cover;
+} 
+```
+
 ## URL for mockApts photos
 - hay
 - https://live.staticflickr.com/1323/660567985_0588581de2_b.jpg
@@ -233,14 +257,6 @@ end
 - quaint
 - https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjrf03_DeE1f17uDlDkVI6JNyZM_Ehv5y3wg&usqp=CAU
 - https://upload.wikimedia.org/wikipedia/commons/0/08/Inside_the_Tree_House_-_geograph.org.uk_-_571538.jpg
-
-## Devise Views
-app/views/devise
-sessions
- - login form-group on all the divs with fields, each class get a form-control and placeholder. Take off label = sign
-registrations
-passwords
-
 
 ## 1) branch: environment √
 > Modified the application.html.erb because it is a template of the app that every view/page will render
@@ -299,7 +315,7 @@ HEADER GOES HERE....
   </li>
 ```
 
-## 2) branch: rails-crud
+## 2) branch: rails-crud √
 - reference syllabus https://github.com/learn-academy-2022-charlie/Syllabus/blob/main/rails/generate-resource.md
 - FORGOT to make associations as stated in stubbed README, ideally do this after generating resource
 - since ran resource only need to create controller in rails and views will be handled by react pages/components using fetch requests
@@ -392,3 +408,68 @@ POST http://localhost:3000/apartments
       <p class="notice"> <%= notice %> </p>
       <p class="alert"> <%= alert %> </p>
 ```
+
+## 3) branch: devise √
+```ruby
+# conditional rendering in home view
+<% if user_signed_in? %>
+  <li class="nav-item">
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"nav-link" %>
+  </li> 
+  <li class="nav-item">
+    <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link" %>
+  </li>
+  <li class="nav-item">
+  <%= link_to 'Tree Houses', apartments_path, class:"nav-link" %>
+  </li> 
+<% else %>
+  <li class="nav-item">
+    <%= link_to 'Sign Up', new_user_registration_path, class:"nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to 'Sign In', new_user_session_path, class:"nav-link" %>
+  </li>
+<% end %>
+```
+- $ rails g devise:views
+
+- $ rails generate migration add_username_to_user
+```ruby
+# db/migrate
+class AddUsernameToUser < ActiveRecord::Migration[6.0]
+  def change
+    # add_column :table, :column_name, :data_type
+    add_column :users, :username, :string
+  end
+end
+
+# $ rails db:migrate
+
+# app/controllers/application_controller.rb
+class ApplicationController < ActionController::Base
+  skip_before_action :verify_authenticity_token
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def configure_permitted_parameters
+    # pass params for the sign up form
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password])
+    # pass params for the sign in form
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password])
+  end
+end
+
+# config/initializers/devise.rb
+# This line is commented out and set to false.
+# config.scoped_views = false
+
+# Update the value to be true:
+config.scoped_views = true
+```
+
+- Go to app/views/devise/registrations/new.html.erb
+- Go to app/views/devise/registrations/edit.html.erb
+- Go to app/views/devise/sessions/new.html.erb: 
+  - Add form-group on all the divs with field
+  - Add class:"form-control", placeholder:"message"
+  - For the check_box, add form-check and class:"form-control"
+
