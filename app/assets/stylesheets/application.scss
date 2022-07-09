@@ -15,6 +15,7 @@
  */
 @import 'bootstrap';
 
+
 // body {
 //   background-image: image-url('tree.png');
 //   // background-repeat: no-repeat;
@@ -57,4 +58,15 @@ body {
   background-color: rgba(177, 169, 103, 0.894);
   border: 2px solid rgba(160, 150, 69, 0.894);
   color: black
+}
+
+.carousel-item {
+  height: 300px;
+}
+
+.carousel-inner .carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 300px;
 }
