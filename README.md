@@ -472,8 +472,9 @@ config.scoped_views = true
   - Add form-group on all the divs with field
   - Add class:"form-control", placeholder:"message"
   - For the check_box, add form-check and class:"form-control"
+  - button, add class:'btn btn-secondary'
 
-## 4) branch: mock-apt
+## 4) branch: mock-apt (read functionality)
 - Add a file to javascript called mockApartments.js 
 ```javascript
 let apartments = [
@@ -561,4 +562,9 @@ import { Card, CardTitle, Col } from 'reactstrap'
   </Card>
 </Col>
 ```
+
+## Routes
+- If you want a route to index or show pages to be rendered on a view, place path as a string 
+<%= link_to 'Tree Houses', "/apartmentindex", class:"nav-button" %>
+
 

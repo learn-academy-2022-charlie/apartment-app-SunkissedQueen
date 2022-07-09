@@ -11,12 +11,11 @@ class ApartmentIndex extends Component {
   {this.props.apartments.map((apartment, index) => {
     return(
       <CardGroup key={index}>
-      <Card body key={apartment.id}>
+      <Card body>
           <CardImg
             alt="Card image cap"
             src={apartment.image}
-            top
-            width="100%"
+            top width="100%"
           />
           <CardBody>
             <CardTitle tag="h5">
