@@ -3,16 +3,19 @@ import {Col, Card, CardTitle, CardText} from 'reactstrap'
 
 class ApartmentShow extends Component {
   render() {
+    const {street, city, state, price, manager, image, bedrooms, bathrooms, pets, email} = this.props.apartment
     return (
-      <>
-        <Col sm="6">
-          <Card body>
-            <CardTitle>Hi, my name is {this.props.apartment.street}!</CardTitle>
-            <img src={this.props.apartment.image2} alt="adorable apartment" />
-            <CardText>Price: {this.props.apartment.price}</CardText>
+      <div className="container">
+
+          <Card body className="tree" >
+            <CardTitle>This treehouse experience is located at {street}, {city}, {state}!</CardTitle>
+            <img src={image} alt="adorable apartment" />
+            <CardText>{price} will give you and your companions access to a wonderful get-away. This treehouse has {bedrooms} bedroom(s) and {bathrooms} bathroom(s).</CardText>
+            <CardText>Pets allowed: {pets}</CardText>
+            <CardText>Property Manager: {manager}, {email}</CardText>
           </Card>
-        </Col>
-      </>
+
+      </div>
     )
   }
 }

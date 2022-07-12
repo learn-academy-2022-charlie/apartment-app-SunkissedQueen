@@ -46,6 +46,7 @@ class App extends Component{
             <Route path="/apartmentedit" component={ApartmentEdit} />
             <Route component={NotFound}/>
           </Switch>
+          <br/>
           <Footer />
         </Router>
         

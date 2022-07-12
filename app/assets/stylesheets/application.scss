@@ -30,6 +30,7 @@
 body {
   background: image-url('lighter.png') repeat center fixed;
   background-size: cover;
+  text-align: center;
 }
 
 .logo-link {
@@ -68,5 +69,19 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    max-height: 300px;
+    // max-height: 300px;
+    // max-width: 300px;
+    width: 100%;     
+    height: auto;
+    border: 3px groove green;
+    border-radius: 6px;
+    margin: auto 0;
+}
+
+.tree {
+  width: 50%;     
+  height: auto;
+  border: 3px groove green;
+  border-radius: 6px;
+  margin: auto;
 }

@@ -510,24 +510,31 @@ class App extends Component{
 <Route path="/apartmentindex" render={(props) => <ApartmentIndex apartments={this.state.apartments} />} />
 
 // Modify ApartmentIndex
-import { Card, CardTitle, Col } from 'reactstrap'
+import React, { Component } from 'react'
+import { Card, CardImg, CardGroup, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import { NavLink } from 'react-router-dom'
 
+class ApartmentIndex extends Component {
+  render() {
+    return (
+      <>
 <h3> For currency there is vacancy!</h3>
 <br />
-  {this.props.apartments.map(apartment => {
+  {this.props.apartments.map((apartment, index) => {
     return(
-      <CardGroup>
-      <Card body key={apartment.id}>
+      <CardGroup key={index}>
+      <Card body>
           <CardImg
             alt="Card image cap"
-            src="https://picsum.photos/318/180"
-            top
-            width="100%"
+            src={apartment.image}
+            top width="100%"
           />
           <CardBody>
             <CardTitle tag="h5">
+            <NavLink to={`/apartmentshow/${apartment.id}`}>
               <h4>{apartment.street}</h4>
-              <h4>{apartment.city, apartment.state}</h4>
+              <h4>{apartment.city}, {apartment.state}</h4>
+            </NavLink>
             </CardTitle>
             <CardSubtitle
               className="mb-2 text-muted"
@@ -545,7 +552,13 @@ import { Card, CardTitle, Col } from 'reactstrap'
         </Card>
       </CardGroup>
     )
-  })}
+  })}   
+      </>
+    )
+  }
+}
+
+export default ApartmentIndex
 
 // Modify App.js and Show
 <Route path="/apartmentshow/:id" render={(props) => {
@@ -568,7 +581,8 @@ import { Card, CardTitle, Col } from 'reactstrap'
 <%= link_to 'Tree Houses', "/apartmentindex", class:"nav-button" %>
 - if wanted auto links
 <%= render "devise/shared/links" %>
-
+- example of a test
+```
 describe("When Home renders", () => {
   it("displays a heading", () => {
     const home = shallow(<Home />)
@@ -577,81 +591,14 @@ describe("When Home renders", () => {
     expect(homeHeading.text()).toEqual("Home from React")
   })
 })
+```
 
-describe("When Home renders", ()=>{
-  let homeRender
-  beforeEach(() => {
-    homeRender = shallow(<Home />)
-  })
-  it("displays a heading", () => {
-    const greeting = homeRender.find("h2")
-    console.log("greeting", greeting.debug()); 
-    expect(greeting.length).toEqual(1)
-    expect(greeting.text()).toEqual("TreeHouse: Don't just swing on it, Sleep in it")
-  })
-  it("has a carousel of images", () => {
-    const carousel = homeRender.find("Uncontrolled Carousel")
-    console.log("carousel", carousel.debug());
-    expect(carousel.length).toEqual(1)
-  })
-})
+## Toggle button
+Had to add bs to the toggle and target attributes
 
+## Footer idea
+- <hr/>
+  <a href="https://web.facebook.com/" > by SyntacticalMagician </a>
 
-        <UncontrolledCarousel
-          items={[
-            {
-              altText: 'Slide 1',
-              caption: 'Slide 1',
-              key: 1,
-              src: ''
-            },
-            {
-              altText: 'Slide 2',
-              caption: 'Slide 2',
-              key: 2,
-              src: ''
-            },
-            {
-              altText: 'Slide 3',
-              caption: 'Slide 3',
-              key: 3,
-              src: ''
-            },
-            {
-              altText: 'Slide 4',
-              caption: 'Slide 4',
-              key: 4,
-              src: 'https://live.staticflickr.com/7528/15665157578_d954f795a4_b.jpg'
-            },
-            {
-              altText: 'Slide 5',
-              caption: 'Slide 5',
-              key: 5,
-              src: 'https://live.staticflickr.com/7399/27301630834_ed0fa93b17_c.jpg'
-            },
-            {
-              altText: 'Slide 6',
-              caption: 'Slide 6',
-              key: 6,
-              src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVsejCYbjmB5GDQX2GXhUKcpfaCDzStfHpuA&usqp=CAU'
-            },
-            {
-              altText: 'Slide 7',
-              caption: 'Slide 7',
-              key: 7,
-              src: 'https://a0.muscache.com/pictures/bc94fc3c-f812-4723-88c1-b8e6995113e1.jpg'
-            },
-            {
-              altText: 'Slide 8',
-              caption: 'Slide 8',
-              key: 8,
-              src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjrf03_DeE1f17uDlDkVI6JNyZM_Ehv5y3wg&usqp=CAU'
-            },
-            {
-              altText: 'Slide 9',
-              caption: 'Slide 9',
-              key: 9,
-              src: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Inside_the_Tree_House_-_geograph.org.uk_-_571538.jpg'
-            }
-          ]}
-        />
+## References
+- 

@@ -1,49 +1,51 @@
-import React, { Component } from 'react'
-import { Card, CardImg, CardGroup, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import React, { Component } from 'react';
+import { Collapse, Card, CardHeader, CardBody, CardImg, CardTitle } from 'reactstrap';
 import { NavLink } from 'react-router-dom'
 
 class ApartmentIndex extends Component {
-  render() {
-    return (
-      <>
-<h3> For currency there is vacancy!</h3>
-<br />
-  {this.props.apartments.map((apartment, index) => {
-    return(
-      <CardGroup key={index}>
-      <Card body>
-          <CardImg
-            alt="Card image cap"
-            src={apartment.image}
-            top width="100%"
-          />
-          <CardBody>
-            <CardTitle tag="h5">
-            <NavLink to={`/apartmentshow/${apartment.id}`}>
-              <h4>{apartment.street}</h4>
-              <h4>{apartment.city}, {apartment.state}</h4>
-            </NavLink>
-            </CardTitle>
-            <CardSubtitle
-              className="mb-2 text-muted"
-              tag="h6"
-            >
-              Card subtitle
-            </CardSubtitle>
-            <CardText>
-              This card has supporting text below as a natural lead-in to additional content.
-            </CardText>
-            <Button>
-              Button
-            </Button>
-          </CardBody>
-        </Card>
-      </CardGroup>
-    )
-  })}   
-      </>
-    )
-  }
+  constructor(props) {
+      super(props)
+      this.toggle = this.toggle.bind(this)
+      this.state = { 
+        collapse: 0
+      }
+    }
+
+    toggle(e) {
+      let event = e.target.dataset.event;
+      this.setState({ collapse: this.state.collapse === Number(event) ? 0 : Number(event) });
+    }
+
+    render() {
+      const {collapse} = this.state;
+      return (
+        <div className="container">
+            <h3 className="page-header">For currency there is vacancy!</h3>
+            {this.props.apartments.map((apartment, index) => {
+              return (
+                <Card style={{ marginBottom: '1rem', width: '50%', height: 'auto', margin: 'auto' }} key={index}>
+                  <CardHeader onClick={this.toggle} data-event={index}>Available TreeHouse {collapse === index?'➖':'➕'}</CardHeader>
+                  <Collapse isOpen={collapse === index}>
+                  <CardImg
+                    alt="Card image cap"
+                    src="https://freesvg.org/img/treehouse.png"
+                    top width="100%"
+                  />  
+                  <CardBody>
+                    <CardTitle tag="h5">
+                      <NavLink to={`/apartmentshow/${apartment.id}`}>
+                        <h4>{apartment.state} Rental</h4>
+                        <h4>{apartment.price}</h4>
+                      </NavLink>
+                    </CardTitle>
+                  </CardBody>
+                  </Collapse>
+                </Card>
+              )
+            })}     
+          </div>
+      )
+    }
 }
 
 export default ApartmentIndex
