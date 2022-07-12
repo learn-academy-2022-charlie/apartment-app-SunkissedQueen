@@ -10,14 +10,23 @@ import Adapter from 'enzyme-adapter-react-16'
 // Imports in the component we are going to be testing.
 import Home from './Home'
 
+
 //Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
 Enzyme.configure({ adapter: new Adapter() })
 
-describe("When Home renders", () => {
+describe("When Home renders", ()=>{
+  let homeRender
+  beforeEach(() => {
+    homeRender = shallow(<Home />)
+  })
   it("displays a heading", () => {
-    const home = shallow(<Home />)
-    const homeHeading = home.find("h3")
-    console.log("HOME", homeHeading.debug());
-    expect(homeHeading.text()).toEqual("This Should Fail")
+    const greeting = homeRender.find("CardSubtitle").first()
+    // console.log("greeting", greeting.debug()); 
+    expect(greeting.props().children).toEqual("Don't just swing on it");
+  })
+  it("has a carousel of images", () => {
+    const carousel = homeRender.find("[className='carousel-item']")
+    console.log("carousel", carousel.first().props());
+    expect(carousel.length).toEqual(5)
   })
 })

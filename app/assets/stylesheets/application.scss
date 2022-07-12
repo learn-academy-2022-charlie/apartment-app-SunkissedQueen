@@ -15,6 +15,7 @@
  */
 @import 'bootstrap';
 
+
 // body {
 //   background-image: image-url('tree.png');
 //   // background-repeat: no-repeat;
@@ -29,6 +30,7 @@
 body {
   background: image-url('lighter.png') repeat center fixed;
   background-size: cover;
+  text-align: center;
 }
 
 .logo-link {
@@ -57,4 +59,29 @@ body {
   background-color: rgba(177, 169, 103, 0.894);
   border: 2px solid rgba(160, 150, 69, 0.894);
   color: black
+}
+
+.carousel-item {
+  height: 300px;
+}
+
+.carousel-inner .carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    // max-height: 300px;
+    // max-width: 300px;
+    width: 100%;     
+    height: auto;
+    border: 3px groove green;
+    border-radius: 6px;
+    margin: auto 0;
+}
+
+.tree {
+  width: 50%;     
+  height: auto;
+  border: 3px groove green;
+  border-radius: 6px;
+  margin: auto;
 }

@@ -510,24 +510,31 @@ class App extends Component{
 <Route path="/apartmentindex" render={(props) => <ApartmentIndex apartments={this.state.apartments} />} />
 
 // Modify ApartmentIndex
-import { Card, CardTitle, Col } from 'reactstrap'
+import React, { Component } from 'react'
+import { Card, CardImg, CardGroup, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap'
+import { NavLink } from 'react-router-dom'
 
+class ApartmentIndex extends Component {
+  render() {
+    return (
+      <>
 <h3> For currency there is vacancy!</h3>
 <br />
-  {this.props.apartments.map(apartment => {
+  {this.props.apartments.map((apartment, index) => {
     return(
-      <CardGroup>
-      <Card body key={apartment.id}>
+      <CardGroup key={index}>
+      <Card body>
           <CardImg
             alt="Card image cap"
-            src="https://picsum.photos/318/180"
-            top
-            width="100%"
+            src={apartment.image}
+            top width="100%"
           />
           <CardBody>
             <CardTitle tag="h5">
+            <NavLink to={`/apartmentshow/${apartment.id}`}>
               <h4>{apartment.street}</h4>
-              <h4>{apartment.city, apartment.state}</h4>
+              <h4>{apartment.city}, {apartment.state}</h4>
+            </NavLink>
             </CardTitle>
             <CardSubtitle
               className="mb-2 text-muted"
@@ -545,7 +552,13 @@ import { Card, CardTitle, Col } from 'reactstrap'
         </Card>
       </CardGroup>
     )
-  })}
+  })}   
+      </>
+    )
+  }
+}
+
+export default ApartmentIndex
 
 // Modify App.js and Show
 <Route path="/apartmentshow/:id" render={(props) => {
@@ -566,5 +579,26 @@ import { Card, CardTitle, Col } from 'reactstrap'
 ## Routes
 - If you want a route to index or show pages to be rendered on a view, place path as a string 
 <%= link_to 'Tree Houses', "/apartmentindex", class:"nav-button" %>
+- if wanted auto links
+<%= render "devise/shared/links" %>
+- example of a test
+```
+describe("When Home renders", () => {
+  it("displays a heading", () => {
+    const home = shallow(<Home />)
+    const homeHeading = home.find("h3")
+    console.log("HOME", homeHeading.debug());
+    expect(homeHeading.text()).toEqual("Home from React")
+  })
+})
+```
 
+## Toggle button
+Had to add bs to the toggle and target attributes
 
+## Footer idea
+- <hr/>
+  <a href="https://web.facebook.com/" > by SyntacticalMagician </a>
+
+## References
+- 

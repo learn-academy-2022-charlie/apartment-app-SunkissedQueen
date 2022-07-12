@@ -12,7 +12,6 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-
 import mockApartments from '../mockApartments.js'
 
 class App extends Component{
@@ -28,7 +27,7 @@ class App extends Component{
     return (
       
         <Router>
-          <Header {...this.props} />
+          
           <Switch>
             <Route exact path="/" component={Home} />
 
@@ -47,6 +46,7 @@ class App extends Component{
             <Route path="/apartmentedit" component={ApartmentEdit} />
             <Route component={NotFound}/>
           </Switch>
+          <br/>
           <Footer />
         </Router>
         

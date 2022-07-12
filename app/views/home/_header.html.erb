@@ -2,18 +2,22 @@
  <div class="container-fluid">  
 
   <span>
-    <a class="logo-link" href=<%= root_path %>>
+    <a class="logo-link" href=<%= root_path %>
       <%= image_tag "dark.png", height: 75 %>
       TreeHouse App
     </a>
   </span>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
   <span style="float:right;">
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <li class: "nav-item">
+        <li class="nav-item">
           <%= link_to 'About Us', home_about_path, class:"nav-button" %>
         </li>
 
