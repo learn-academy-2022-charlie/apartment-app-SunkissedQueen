@@ -13,10 +13,19 @@ import ApartmentNew from './ApartmentNew'
 //Allows us to utilize the adapter we import in earlier, allowing us to call and render a component.
 Enzyme.configure({ adapter: new Adapter() })
 
-describe("When ApartmentNew renders", () => {
-  it("displays a heading", () => {
-    const apartmentNew = shallow(<ApartmentNew />)
-    const apartmentNewHeading = apartmentNew.find("h3")
-    expect(apartmentNewHeading.text()).toEqual("This Should Fail")
+describe("When ApartmentNew Renders", () => {
+
+  let apartmentNewRender
+  beforeEach(() => {
+    apartmentNewRender = shallow(<ApartmentNew />)
   })
+  it("displays a heading", ()=>{
+    const apartmentNewHeading = apartmentNewRender.find("h2")
+    expect(apartmentNewHeading.length).toEqual(1)
+    expect(apartmentNewHeading.text()).toEqual("Share a new treehouse experience.")
+  })
+  it("displays a form", ()=>{
+    const apartmentNewForm = apartmentNewRender.find("Form")
+    expect(apartmentNewForm.length).toEqual(1)
+  })     
 })
