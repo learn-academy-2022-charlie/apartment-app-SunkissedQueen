@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import {Col, Card, CardTitle, CardText} from 'reactstrap'
+import {Button, Card, CardTitle, CardText} from 'reactstrap'
+import {NavLink} from 'react-router-dom'
 
 class ApartmentShow extends Component {
   render() {
@@ -13,8 +14,11 @@ class ApartmentShow extends Component {
             <CardText>{price} will give you and your companions access to a wonderful get-away. This treehouse has {bedrooms} bedroom(s) and {bathrooms} bathroom(s).</CardText>
             <CardText>Pets allowed: {pets}</CardText>
             <CardText>Property Manager: {manager}, {email}</CardText>
+            <br/>
+            <NavLink to={`/apartmentedit/${this.props.apartment.id}`}>
+              <Button>Edit TreeHouse</Button>
+            </NavLink>
           </Card>
-
       </div>
     )
   }

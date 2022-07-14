@@ -16,7 +16,11 @@ Enzyme.configure({ adapter: new Adapter() })
 describe("When ApartmentEdit renders", () => {
   it("displays a heading", () => {
     const apartmentEdit = shallow(<ApartmentEdit />)
-    const apartmentEditHeading = apartmentEdit.find("h3")
-    expect(apartmentEditHeading.text()).toEqual("This Should Fail")
+    const apartmentEditHeading = apartmentEdit.find("h2")
+    expect(apartmentEditHeading.text()).toEqual("Update the TreeHouse")
   })
+  it("displays a form", ()=>{
+    const apartmentEditForm = apartmentEditRender.find("Form")
+    expect(apartmentEditForm.length).toEqual(1)
+  }) 
 })

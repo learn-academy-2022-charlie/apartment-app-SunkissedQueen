@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound'
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
 } from 'react-router-dom'
 import mockApartments from '../mockApartments.js'
 
@@ -23,9 +23,20 @@ class App extends Component{
     }
   }
 
+  createTreeHouse = (treeHouse) => {
+    console.log("Treehouse has been created", treeHouse)
+  }
+
+  updateTreeHouse = (editTree, id) => {
+    console.log("editTree:", editTree)
+    console.log("id:", id)
+  }
+
   render() {
+
     return (
-      
+      <>
+
         <Router>
           
           <Switch>
@@ -42,15 +53,29 @@ class App extends Component{
               return <ApartmentShow apartment={apartment} />
             }} />
             
-            <Route path="/apartmentnew" component={ApartmentNew} />
-            <Route path="/apartmentedit" component={ApartmentEdit} />
+            <Route
+              path="/apartmentnew"
+              render={(props) => <ApartmentNew createTreeHouse={this.createTreeHouse} />}
+            />
+
+            <Route 
+              path="/apartmentedit/:id" 
+              render={(props) => {
+                let id = props.match.params.id
+                let apartment = this.state.apartments.find(apartment => apartment.id === +id)
+                return <ApartmentEdit updateTreeHouse={this.updateTreeHouse} apartment={apartment} id={id} />
+              }} 
+            />
+
             <Route component={NotFound}/>
+
           </Switch>
           <br/>
+
           <Footer />
         </Router>
         
-        
+      </>
   
     )
   }
