@@ -14,9 +14,9 @@ class ApartmentNew extends Component {
         manager: "",
         email: "",
         price: "",
-        bedroom: "",
-        bathroom: "",
-        pet: "",
+        bedrooms: "",
+        bathrooms: "",
+        pets: "",
         image: "",
       },
       submitted: false
@@ -48,11 +48,11 @@ class ApartmentNew extends Component {
               Address
             </Label>
             <Input
-              name="address"
+              name="street"
               placeholder="Street Address"
               type="text"
               onChange={this.handleChange}
-              value={this.state.newTreeHouse.address}
+              value={this.state.newTreeHouse.street}
             />
           </FormGroup>
           <Row>
@@ -118,17 +118,62 @@ class ApartmentNew extends Component {
           </Row>
 
           <Row>
+            <Col md={4}>
+              <FormGroup>
+              <Label for="examplePrice">
+                  Price
+                </Label>
+                <Input
+                  name="price"
+                  placeholder="Property Price"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.newTreeHouse.price}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="exampleBedroom">
+                  Bedroom(s)
+                </Label>
+                <Input
+                  name="bedrooms"
+                  placeholder="Bedroom"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.newTreeHouse.bedrooms}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="exampleBathroom">
+                  Bathroom(s)
+                </Label>
+                <Input
+                  name="bathrooms"
+                  placeholder="Bathroom"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.newTreeHouse.bathrooms}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+
+          <Row>
             <Col md={6}>
               <FormGroup>
                 <Label for="examplePet">
                   Pet
                 </Label>
                 <Input
-                  name="pet"
+                  name="pets"
                   placeholder="Are pets acceptable?"
                   type="text"
                   onChange={this.handleChange}
-                  value={this.state.newTreeHouse.pet}
+                  value={this.state.newTreeHouse.pets}
                 />
               </FormGroup>
             </Col>

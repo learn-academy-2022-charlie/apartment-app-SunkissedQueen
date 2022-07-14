@@ -14,9 +14,9 @@ class ApartmentEdit extends Component {
         manager: this.props.apartment ? this.props.apartment.manager : "",
         email: this.props.apartment ? this.props.apartment.email : "",
         price: this.props.apartment ? this.props.apartment.price : "",
-        bedroom: this.props.apartment ? this.props.apartment.bedroom : "",
-        bathroom: this.props.apartment ? this.props.apartment.bathroom : "",
-        pet: this.props.apartment ? this.props.apartment.pet : "",
+        bedrooms: this.props.apartment ? this.props.apartment.bedrooms : "",
+        bathrooms: this.props.apartment ? this.props.apartment.bathrooms : "",
+        pets: this.props.apartment ? this.props.apartment.pets : "",
         image: this.props.apartment ? this.props.apartment.image : "",
       },
       submitted: false
@@ -47,7 +47,7 @@ class ApartmentEdit extends Component {
               Address
             </Label>
             <Input
-              name="address"
+              name="street"
               type="text"
               onChange={this.handleChange}
               value={this.state.editTreeHouse.street}            />
@@ -107,16 +107,58 @@ class ApartmentEdit extends Component {
           </Row>
 
           <Row>
+            <Col md={4}>
+              <FormGroup>
+              <Label for="examplePrice">
+                  Price
+                </Label>
+                <Input
+                  name="price"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.editTreeHouse.price}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="exampleBedroom">
+                  Bedroom(s)
+                </Label>
+                <Input
+                  name="bedrooms"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.editTreeHouse.bedrooms}
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Label for="exampleBathroom">
+                  Bathroom(s)
+                </Label>
+                <Input
+                  name="bathrooms"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.editTreeHouse.bathrooms}
+                />
+              </FormGroup>
+            </Col>
+          </Row>
+
+          <Row>
             <Col md={6}>
               <FormGroup>
                 <Label for="examplePet">
                   Pet
                 </Label>
                 <Input
-                  name="pet"
+                  name="pets"
                   type="text"
                   onChange={this.handleChange}
-                  value={this.state.editTreeHouse.pet}
+                  value={this.state.editTreeHouse.pets}
                 />
               </FormGroup>
             </Col>
