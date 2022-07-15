@@ -577,12 +577,14 @@ export default ApartmentIndex
 ```
 
 ## Routes
-- If you want a route to index or show pages to be rendered on a view, place path as a string 
+```ruby
+# If you want a route to index or show pages to be rendered on a view, place path as a string 
 <%= link_to 'Tree Houses', "/apartmentindex", class:"nav-button" %>
-- if wanted auto links
+# if wanted auto links
 <%= render "devise/shared/links" %>
-- example of a test
 ```
+```javascript
+// example of a test
 describe("When Home renders", () => {
   it("displays a heading", () => {
     const home = shallow(<Home />)
@@ -597,19 +599,24 @@ describe("When Home renders", () => {
 Had to add bs to the toggle and target attributes
 
 ## Footer idea
+```
 - <hr/>
   <a href="https://web.facebook.com/" > by SyntacticalMagician </a>
+```
 
 ## References
 - 
 
 ## branch: new-tree
-- Use my notes from ApartmentApp
-The work flow --- Create a test that will verify that the CatNew page has a form and a heading.
-Trello---As a developer, I have test coverage on my new page.
+```javascript
+//  Use my notes from ApartmentApp
+// The work flow --- Create a test that will verify that the CatNew page has a form and a heading.
+// Trello---As a developer, I have test coverage on my new page.
 
-Bring in test dependencies from jest enzyme
-write test
+// Bring in test dependencies from jest enzyme
+// $ yarn add jest
+// $ yarn add -D enzyme react-test-renderer enzyme-adapter-react-16
+// write test
 // Imports Enzyme testing and deconstructs Shallow into our test file.
 import Enzyme, { shallow } from 'enzyme'
 
@@ -638,12 +645,12 @@ describe("When CatNew Renders", () => {
     expect(catNewForm.length).toEqual(1)
   })     
 })
-$ yarn test
-Good failure if all tests appear.
-The work flow --- Add a form and a heading on the CatNew page.
-Trello---As a user, I can fill out a form to add a new cat.
+// $ yarn test
+// Good failure if all tests appear.
+// The work flow --- Add a form and a heading on the CatNew page.
+// Trello---As a user, I can fill out a form to add a new cat.
 
-copy code for form and button from reactstrap.github.io
+// copy code for form and button from reactstrap.github.io
 <Form>
   <FormGroup>
     <Label for="exampleEmail">
@@ -660,11 +667,11 @@ copy code for form and button from reactstrap.github.io
     Submit
   </Button>
 </Form>
-import all the tags from Reactstrap
+// import all the tags from Reactstrap
   import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
-Update the form to reflect the input fields for cat's name, age, enjoys, image
-Add the h3 heading as shown on the test
-Remove id attribute from the Input component
+// Update the form to reflect the input fields for cat's name, age, enjoys, image
+// Add the h3 heading as shown on the test
+// Remove id attribute from the Input component
     return (
       <>
       <h3>Tell us about that fur!</h3>
@@ -685,13 +692,13 @@ Remove id attribute from the Input component
       </Form>
       </>
     )
-Verify the tests passed
-Ctrl + C to stop the tests from auto-running
-A form with the 4 input fields should appear on the CatNew page in the browser
-The work flow --- Transform CatNew page into a logic component.
-Trello---As a developer, I can store the cat object in state
+// Verify the tests passed
+// Ctrl + C to stop the tests from auto-running
+// A form with the 4 input fields should appear on the CatNew page in the browser
+// The work flow --- Transform CatNew page into a logic component.
+// Trello---As a developer, I can store the cat object in state
 
-Constructor method with a state object under the class component. We will also include a nested object that will store the input data for our cats
+// Constructor method with a state object under the class component. We will also include a nested object that will store the input data for our cats
   constructor(props){
     super(props)
     this.state = {
@@ -703,11 +710,11 @@ Constructor method with a state object under the class component. We will also i
       }
     }
   }
-Collect info with a custom method and event listener. The method will initially just print out the event object produced by the event listener
+// Collect info with a custom method and event listener. The method will initially just print out the event object produced by the event listener
 handleChange = (e) => { 
   console.log(e)
 }
-Each input will receive an onChange event listener.
+// Each input will receive an onChange event listener.
 
   <Input
     name="age"
@@ -715,14 +722,14 @@ Each input will receive an onChange event listener.
     type="text"
     onChange={this.handleChange}
   />
-update the handleChange() to reflect the e.target.name and e.target.value
-update handleChange() to change the appropriate keys in state with destructuring the newCat object from state, dynamically sharing the key:value pairs,
+// update the handleChange() to reflect the e.target.name and e.target.value
+// update handleChange() to change the appropriate keys in state with destructuring the newCat object from state, dynamically sharing the key:value pairs,
 handleChange = (e) => {
   let { newCat } = this.state
   newCat[e.target.name] = e.target.value
   this.setState({newCat: newCat})
 }
-Add a value attribute to the input field to ensure what the user types is showing visually on the form
+// Add a value attribute to the input field to ensure what the user types is showing visually on the form
   <Input
     name="age"
     placeholder="What is your age?"
@@ -730,33 +737,37 @@ Add a value attribute to the input field to ensure what the user types is showin
     onChange={this.handleChange}
     value={this.state.newCat.age}
   />
-The work flow --- Pass info to App.js
-Trello---As a developer, I can pass the cat object to App.js on submit and see the cat object logged in the console.
+// The work flow --- Pass info to App.js
+// Trello---As a developer, I can pass the cat object to App.js on submit and see the cat object logged in the console.
 
-Create a function on App.js that takes in an argument and prints that out.
+// Create a function on App.js that takes in an argument and prints that out.
   createCat = (cat) => {
     console.log("Cat has been created", cat)
   }
-Make function available to child component
+// Make function available to child component
   <Route
     path="/catnew"
     render={(props) => <CatNew createCat={this.createCat} />}
   />
-Access the createCat() in CatNew.js by creating a function that calls upon createCat() and passes the newCat object
+// Access the createCat() in CatNew.js by creating a function that calls upon createCat() and passes the newCat object
 handleSubmit = () => {
   this.props.createCat(this.state.newCat)
 }
-Update the submit button to trigger the handleSubmit()
+// Update the submit button to trigger the handleSubmit()
   <Button onClick={this.handleSubmit} name='submit'>
     Add a Cat
   </Button> 
-The work flow --- Redirect CatNew page to the CatIndex page after submitting cat info
+// The work flow --- Redirect CatNew page to the CatIndex page after submitting cat info
 
--react-router import
-`import { Redirect } from 'react-router-dom'`
-- Set the condition to be met that will allow a redirect. Initial state ---> submitted: false
-- Use handleSubmit() to update submitted to true when a submission is made
-- JavaScript code at the bottom of the JSX that will redirect when submitted is true
-`{this.state.submitted && <Redirect to="/catindex" />}`
-
-## branch 
+// react-router import
+import { Redirect } from 'react-router-dom'
+//  Set the condition to be met that will allow a redirect. Initial state ---> submitted: false
+//  Use handleSubmit() to update submitted to true when a submission is made
+//  JavaScript code at the bottom of the JSX that will redirect when submitted is true
+{this.state.submitted && <Redirect to="/catindex" />}
+```
+## branch delete
+- Make a delete method on App.js
+- pass as a prop to Show.js
+- onclick attribute to button
+- use same syntax as edit syntax

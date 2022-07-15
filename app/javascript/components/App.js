@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
 import ApartmentIndex from './pages/ApartmentIndex'
@@ -32,8 +31,12 @@ class App extends Component{
     console.log("id:", id)
   }
 
-  render() {
+  deleteTreeHouse = (treeId) => {
+    console.log("Treehouse has been deleted", treeId)
+  }
 
+  render() {
+    console.log(this.state.apartments)
     return (
       <>
 
@@ -50,7 +53,7 @@ class App extends Component{
             <Route path="/apartmentshow/:id" render={(props) => {
               let id = props.match.params.id
               let apartment = this.state.apartments.find(apartment => apartment.id === +id)
-              return <ApartmentShow apartment={apartment} />
+              return <ApartmentShow apartment={apartment} deleteTreeHouse={this.deleteTreeHouse}/>
             }} />
             
             <Route
