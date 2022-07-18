@@ -11,19 +11,45 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
-import mockApartments from '../mockApartments.js'
+// import mockApartments from '../mockApartments.js'
 
 class App extends Component{
 
   constructor(props){
     super(props)
     this.state = {
-      apartments: mockApartments
+      // apartments: mockApartments
+      apartments: []
     }
   }
 
+  componentDidMount(){
+    this.readTreeHouse()
+  }
+  
+  readTreeHouse = () => {
+    fetch("http://localhost:3000/apartments")
+    .then(response => response.json())
+    // set the state with the data from the backend into the empty array
+    .then(aptArr => this.setState({apartments: aptArr}))
+    .catch(errors => console.log("Apartment read errors:", errors))
+  }
   createTreeHouse = (treeHouse) => {
     console.log("Treehouse has been created", treeHouse)
+  }
+
+  createCat = (treeHouse) => {
+    fetch("http://localhost:3000/apartments", {
+      body: JSON.stringify(treeHouse),
+      headers: {
+          "Content-Type": "application/json"
+      },
+      method: "POST"
+      })
+    .then(response => response.json())
+    .then(payload => this.readTreeHouse())
+
+    .catch(errors => console.log("Treehouse create errors:", errors))
   }
 
   updateTreeHouse = (editTree, id) => {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Card, CardHeader, CardBody, CardImg, CardTitle } from 'reactstrap';
 import { NavLink } from 'react-router-dom'
+import treeLogo from '../../../assets/images/treelogo.png'
 
 class ApartmentIndex extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class ApartmentIndex extends Component {
                   <Collapse isOpen={collapse === index}>
                   <CardImg
                     alt="Card image cap"
-                    src="https://freesvg.org/img/treehouse.png"
+                    src={treeLogo}
                     top width="100%"
                   />  
                   <CardBody>
