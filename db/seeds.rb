@@ -16,7 +16,7 @@ apartments_arr = [
     bedrooms: 2, 
     bathrooms: 1, 
     pets: "only air", 
-    image: "/Users/charleanbaxter/Desktop/projects/apartment-app-SunkissedQueen/app/javascript/assets/fancy1.jpeg"
+    image: "https://live.staticflickr.com/65535/51348694292_4f88ef687b_b.jpg"
   },{
     street: "Aint Street", 
     city: "Another Fake City", 
@@ -27,7 +27,7 @@ apartments_arr = [
     bedrooms: 3, 
     bathrooms: 2, 
     pets: "under 10 lbs", 
-    image: "/Users/charleanbaxter/Desktop/projects/apartment-app-SunkissedQueen/app/javascript/assets/hay1.jpeg"
+    image: "https://live.staticflickr.com/7619/16968477139_b4ef701b21_b.jpg"
   },{
     street: "Another Fake Street", 
     city: "Another Fake City", 
@@ -38,7 +38,7 @@ apartments_arr = [
     bedrooms: 2, 
     bathrooms: 1, 
     pets: "only air", 
-    image: "/Users/charleanbaxter/Desktop/projects/apartment-app-SunkissedQueen/app/javascript/assets/island1.jpeg"
+    image: "https://s0.geograph.org.uk/photos/03/24/032426_d609a614.jpg"
   },{
     street: "Another Fake Street", 
     city: "Another Fake City", 
@@ -49,7 +49,7 @@ apartments_arr = [
     bedrooms: 2, 
     bathrooms: 1, 
     pets: "only air", 
-    image: "/Users/charleanbaxter/Desktop/projects/apartment-app-SunkissedQueen/app/javascript/assets/quaint1.jpeg"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0FaoNx3pGbnb5AnsR9SbHNbopHgaphoz8Uw&usqp=CAU"
   },{
     street: "Another Fake Street", 
     city: "Another Fake City", 

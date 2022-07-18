@@ -228,7 +228,7 @@ Error: Cannot find module '../assets/treelogo.png'
 
 ## Loading images√
 - in javascript/assets
-  - import treelogo from '../../assets/treelogo.png'
+  - import treelogo from '../../../assets/treelogo.png'
   - <img src={treelogo} alt="Logo" height="35" width="auto"/>
 - app/assets/images and referenced in views
   - <%= image_tag "treelogo.png", height: 50 %>

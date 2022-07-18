@@ -38,6 +38,20 @@ class App extends Component{
     console.log("Treehouse has been created", treeHouse)
   }
 
+  createCat = (treeHouse) => {
+    fetch("http://localhost:3000/apartments", {
+      body: JSON.stringify(treeHouse),
+      headers: {
+          "Content-Type": "application/json"
+      },
+      method: "POST"
+      })
+    .then(response => response.json())
+    .then(payload => this.readTreeHouse())
+
+    .catch(errors => console.log("Treehouse create errors:", errors))
+  }
+
   updateTreeHouse = (editTree, id) => {
     console.log("editTree:", editTree)
     console.log("id:", id)
