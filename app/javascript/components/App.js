@@ -69,6 +69,18 @@ class App extends Component{
     console.log("Treehouse has been deleted", treeId)
   }
 
+  deleteTreeHouse = (id) => {
+    fetch(`http://localhost:3000/apartments/${id}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(payload => this.readTreeHouse())
+    .catch(errors => console.log("delete errors:", errors))
+  }
+
   render() {
     console.log(this.state.apartments)
     return (
