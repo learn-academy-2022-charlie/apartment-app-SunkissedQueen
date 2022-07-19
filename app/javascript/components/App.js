@@ -50,6 +50,21 @@ class App extends Component{
     console.log("id:", id)
   }
 
+  updateTreeHouse = (updatedTree, id) => {
+    fetch(`http://localhost:3000/apartments/${id}`, {
+      // converting an object to a string
+      body: JSON.stringify(updatedTree),
+      // specify the info being sent in JSON and the info returning should be JSON
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "PATCH"
+    })
+    .then(response => response.json())
+    .then(payload => this.readTreeHouse())
+    .catch(errors => console.log("TreeHouse update errors:", errors))
+  }
+
   deleteTreeHouse = (treeId) => {
     console.log("Treehouse has been deleted", treeId)
   }
