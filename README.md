@@ -313,6 +313,11 @@ HEADER GOES HERE....
   <li class="nav-item">
     <%= link_to 'About Us', home_about_path, class:"nav-link" %>
   </li>
+
+
+#alternate method instead of partial add to each view
+<%= react_component('components/Header') %>
+<%= react_component('components/Footer') %>  
 ```
 
 ## 2) branch: rails-crud √

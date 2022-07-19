@@ -11,14 +11,12 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
-// import mockApartments from '../mockApartments.js'
 
 class App extends Component{
 
   constructor(props){
     super(props)
     this.state = {
-      // apartments: mockApartments
       apartments: []
     }
   }
@@ -30,15 +28,11 @@ class App extends Component{
   readTreeHouse = () => {
     fetch("http://localhost:3000/apartments")
     .then(response => response.json())
-    // set the state with the data from the backend into the empty array
     .then(aptArr => this.setState({apartments: aptArr}))
     .catch(errors => console.log("Apartment read errors:", errors))
   }
-  createTreeHouse = (treeHouse) => {
-    console.log("Treehouse has been created", treeHouse)
-  }
 
-  createCat = (treeHouse) => {
+  createTreeHouse = (treeHouse) => {
     fetch("http://localhost:3000/apartments", {
       body: JSON.stringify(treeHouse),
       headers: {
@@ -48,7 +42,6 @@ class App extends Component{
       })
     .then(response => response.json())
     .then(payload => this.readTreeHouse())
-
     .catch(errors => console.log("Treehouse create errors:", errors))
   }
 
@@ -57,8 +50,35 @@ class App extends Component{
     console.log("id:", id)
   }
 
+  updateTreeHouse = (updatedTree, id) => {
+    fetch(`http://localhost:3000/apartments/${id}`, {
+      // converting an object to a string
+      body: JSON.stringify(updatedTree),
+      // specify the info being sent in JSON and the info returning should be JSON
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "PATCH"
+    })
+    .then(response => response.json())
+    .then(payload => this.readTreeHouse())
+    .catch(errors => console.log("TreeHouse update errors:", errors))
+  }
+
   deleteTreeHouse = (treeId) => {
     console.log("Treehouse has been deleted", treeId)
+  }
+
+  deleteTreeHouse = (id) => {
+    fetch(`http://localhost:3000/apartments/${id}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    })
+    .then(response => response.json())
+    .then(payload => this.readTreeHouse())
+    .catch(errors => console.log("delete errors:", errors))
   }
 
   render() {
@@ -71,10 +91,10 @@ class App extends Component{
           <Switch>
             <Route exact path="/" component={Home} />
 
-            <Route 
-              path="/apartmentindex" 
-              render={(props) => <ApartmentIndex apartments={this.state.apartments} />} 
-            />
+            <Route path="/apartmentindex" render={(props) => {
+                let apartments = this.state.apartments
+              return <ApartmentIndex apartments={apartments} current_user={this.props.current_user}/>
+            }} />
 
             <Route path="/apartmentshow/:id" render={(props) => {
               let id = props.match.params.id
@@ -84,7 +104,7 @@ class App extends Component{
             
             <Route
               path="/apartmentnew"
-              render={(props) => <ApartmentNew createTreeHouse={this.createTreeHouse} />}
+              render={(props) => <ApartmentNew createTreeHouse={this.createTreeHouse} current_user={this.props.current_user}/>}
             />
 
             <Route 

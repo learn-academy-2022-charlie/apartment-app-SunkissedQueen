@@ -18,6 +18,7 @@ class ApartmentNew extends Component {
         bathrooms: "",
         pets: "",
         image: "",
+        user_id: this.props.current_user.id
       },
       submitted: false
     }
@@ -140,7 +141,7 @@ class ApartmentNew extends Component {
                 <Input
                   name="bedrooms"
                   placeholder="Bedroom"
-                  type="text"
+                  type="number"
                   onChange={this.handleChange}
                   value={this.state.newTreeHouse.bedrooms}
                 />
@@ -154,7 +155,7 @@ class ApartmentNew extends Component {
                 <Input
                   name="bathrooms"
                   placeholder="Bathroom"
-                  type="text"
+                  type="number"
                   onChange={this.handleChange}
                   value={this.state.newTreeHouse.bathrooms}
                 />
