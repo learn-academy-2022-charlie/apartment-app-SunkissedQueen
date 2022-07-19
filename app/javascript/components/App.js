@@ -34,11 +34,8 @@ class App extends Component{
     .then(aptArr => this.setState({apartments: aptArr}))
     .catch(errors => console.log("Apartment read errors:", errors))
   }
-  createTreeHouse = (treeHouse) => {
-    console.log("Treehouse has been created", treeHouse)
-  }
 
-  createCat = (treeHouse) => {
+  createTreeHouse = (treeHouse) => {
     fetch("http://localhost:3000/apartments", {
       body: JSON.stringify(treeHouse),
       headers: {
@@ -48,8 +45,8 @@ class App extends Component{
       })
     .then(response => response.json())
     .then(payload => this.readTreeHouse())
-
     .catch(errors => console.log("Treehouse create errors:", errors))
+    // console.log("createTree:", treeHouse)
   }
 
   updateTreeHouse = (editTree, id) => {
@@ -71,10 +68,10 @@ class App extends Component{
           <Switch>
             <Route exact path="/" component={Home} />
 
-            <Route 
-              path="/apartmentindex" 
-              render={(props) => <ApartmentIndex apartments={this.state.apartments} />} 
-            />
+            <Route path="/apartmentindex" render={(props) => {
+                let apartments = this.state.apartments
+              return <ApartmentIndex apartments={apartments} current_user={this.props.current_user}/>
+            }} />
 
             <Route path="/apartmentshow/:id" render={(props) => {
               let id = props.match.params.id
@@ -84,7 +81,7 @@ class App extends Component{
             
             <Route
               path="/apartmentnew"
-              render={(props) => <ApartmentNew createTreeHouse={this.createTreeHouse} />}
+              render={(props) => <ApartmentNew createTreeHouse={this.createTreeHouse} current_user={this.props.current_user}/>}
             />
 
             <Route 
