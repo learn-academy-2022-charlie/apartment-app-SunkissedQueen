@@ -5,6 +5,7 @@
   </div>
   <div class="card-body">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        
       <div class="field form-group">
         <%= f.label :username %><br />
         <%= f.text_field :username, class:"form-control", placeholder:"Please enter username", autofocus: true, autocomplete: "username" %>

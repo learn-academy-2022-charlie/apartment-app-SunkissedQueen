@@ -5,7 +5,9 @@ class Home extends Component {
   render() {
     return (
       <div className="container">
-        <Card style={{borderWidth:  6,  borderColor:  'green', borderStyle: 'groove', backgroundColor:'antiquewhite', width: '50%', height: 'auto', margin: 'auto'}}>
+        <Card 
+          style={{borderWidth: 6, borderColor: 'green', borderStyle: 'groove', backgroundColor: 'antiquewhite', width: '50%', height: 'auto', margin: 'auto'}}
+        >
           <CardBody>
             <CardTitle tag="h1">
               TreeHouse

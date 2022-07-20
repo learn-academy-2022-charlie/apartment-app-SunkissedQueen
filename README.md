@@ -1,3 +1,4 @@
+<!-- Project is still in progress. Current update as of Jul 20, 2022 -->
 # Apartment App
 This app has been created for you to mimic the feeling of entering into a developer role where there is established code that you have not created. This Apartment application has a few features that have been created for you and some key items that have been left totally untouched. Part of your job as a developer is to be able to pick up code that has already been created, understand what is going on with it, and continue the development of that code. 
 
@@ -111,9 +112,10 @@ rails s
 ```
 
 See what is available already in the application.
-- What can a USER do? Currently a user can sign in/sign up/ log out/ see all pages
+- What can a USER do? 
+  - Currently a user can sign in/sign up/ log out/ see all pages
 - What views (pages, components) are available?
-header, footer, index, edit, show, new, home, notfound
+  - header, footer, index, edit, show, new, home, notfound
 
 ## 🏡 Apartment Resource √
 The Devise User model is going to have an association with the Apartment model. In this situation, the User will have many apartments and the Apartments will belong to a User.
@@ -215,6 +217,7 @@ end
 - Look at Trello
 - To quickly refresh webpacker in an additional tab run: $ ./bin/webpack-dev-server
 - Option + V will create a checkmark to areas that I completed
+- http://khaledipsum.com/
 
 ## Error Messages
 ```
@@ -224,39 +227,18 @@ Error: Cannot find module '../assets/treelogo.png'
     at eval (eval at ./node_modules/react_ujs/react_ujs/src/getConstructor/fromGlobal.js.module.exports
 ```
 - Got that error after improper path to image
-- ../../ to show the levels that needed to go to retrieve images in the javascript folder
-
-## Loading images√
-- in javascript/assets
-  - import treelogo from '../../../assets/treelogo.png'
-  - <img src={treelogo} alt="Logo" height="35" width="auto"/>
-- app/assets/images and referenced in views
-  - <%= image_tag "treelogo.png", height: 50 %>
-- application.scss
-```css
-body {
-  background: image-url('lighter.png') repeat center fixed;
-  background-size: cover;
-} 
-```
-
-## URL for mockApts photos
-- hay
-- https://live.staticflickr.com/1323/660567985_0588581de2_b.jpg
-- https://pixnio.com/free-images/2017/09/12/2017-09-12-06-53-58-550x367.jpg
-
-- fancy
-- https://upload.wikimedia.org/wikipedia/commons/d/de/View_from_Pagatpat_tree_house_-_panoramio_%281%29.jpg
-- https://live.staticflickr.com/7528/15665157578_d954f795a4_b.jpg
-- https://live.staticflickr.com/7399/27301630834_ed0fa93b17_c.jpg
-
-- island
-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVsejCYbjmB5GDQX2GXhUKcpfaCDzStfHpuA&usqp=CAU
-- https://a0.muscache.com/pictures/bc94fc3c-f812-4723-88c1-b8e6995113e1.jpg
-
-- quaint
-- https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjrf03_DeE1f17uDlDkVI6JNyZM_Ehv5y3wg&usqp=CAU
-- https://upload.wikimedia.org/wikipedia/commons/0/08/Inside_the_Tree_House_-_geograph.org.uk_-_571538.jpg
+  - in javascript/assets
+    - import treelogo from '../../../assets/treelogo.png'
+    - <img src={treelogo} alt="Logo" height="35" width="auto"/>
+  - in app/assets/images copy/pasteimage and reference in views
+    - <%= image_tag "treelogo.png", height: 50 %>
+  - application.scss
+  ```css
+  body {
+    background: image-url('lighter.png') repeat center fixed;
+    background-size: cover;
+  } 
+  ```
 
 ## 1) branch: environment √
 > Modified the application.html.erb because it is a template of the app that every view/page will render
@@ -286,23 +268,21 @@ body {
 
 #  config/routes.rb
     get 'home/about'
+```
+## Styling   
+- https://getbootstrap.com/
+- a blend of the template from bootstrap site and info already on application.html.erb
+- https://getbootstrap.com/docs/5.2/getting-started/introduction/
+- bootstrap class that automatically gives spacing/alignment
+  - <div class="container">yield</div>
 
-# - Use bootstrap for styling   https://getbootstrap.com/
-# a blend of the template from bootstrap site and info already on application.html.erb
-# https://getbootstrap.com/docs/5.2/getting-started/introduction/
-# Tutorial codemy.com https://www.youtube.com/watch?v=kxNneOy8ewU&list=PLCC34OHNcOtrk3BDsfZwf4GattdLoKCOF&index=3
-
-# bootstrap class that automatically gives spacing/alignment
-    <div class="container">yield</div>
-
-# Get header on all pages
-#  Create a partial view...app/views/home/_header.html.erb
-HEADER GOES HERE....
-# - on application.html.erb...rails know to look for the file
-    <%= render 'home/header' %>
-
-# Go to components on bootstrap for navbar, add to header.html.erb 
-# If the partial view was not created, then this code would have to live on the application.html.erb instead of having render 'home/header'
+## Header on all pages
+- Create a partial view...app/views/home/_header.html.erb
+  - HEADER GOES HERE....
+- on application.html.erb...rails know to look for the file
+  - <%= render 'home/header' %>
+- Go to components on bootstrap for navbar, add to header.html.erb (If the partial view was not created, then this code would have to live on the application.html.erb instead of having render 'home/header')
+```ruby
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">TreeHouse</a>
@@ -313,7 +293,6 @@ HEADER GOES HERE....
   <li class="nav-item">
     <%= link_to 'About Us', home_about_path, class:"nav-link" %>
   </li>
-
 
 #alternate method instead of partial add to each view
 <%= react_component('components/Header') %>
@@ -600,17 +579,6 @@ describe("When Home renders", () => {
 })
 ```
 
-## Toggle button
-Had to add bs to the toggle and target attributes
-
-## Footer idea
-```
-- <hr/>
-  <a href="https://web.facebook.com/" > by SyntacticalMagician </a>
-```
-
-## References
-- 
 
 ## branch: new-tree
 ```javascript
@@ -937,3 +905,17 @@ end
     params.require(:cat).permit(:name, :age, :enjoys, :image)
   end
 ```
+## Toggle feature
+- Had to add bs to the toggle and target attributes
+- Remove the separate javascript files for bootstrap, keep the bundle
+
+## Footer idea
+```javascript
+- <hr/>
+  <a href="https://web.facebook.com/" > by SyntacticalAstronaut </a>
+```
+
+## References
+- https://www.youtube.com/watch?v=w2rEib-vJNs
+- https://stackblitz.com/edit/reactstrap-accordion-usando-componente-card-e23pt8?file=Example.js
+- https://www.youtube.com/watch?v=kxNneOy8ewU&list=PLCC34OHNcOtrk3BDsfZwf4GattdLoKCOF&index=3

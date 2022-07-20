@@ -45,16 +45,9 @@ class App extends Component{
     .catch(errors => console.log("Treehouse create errors:", errors))
   }
 
-  updateTreeHouse = (editTree, id) => {
-    console.log("editTree:", editTree)
-    console.log("id:", id)
-  }
-
   updateTreeHouse = (updatedTree, id) => {
     fetch(`http://localhost:3000/apartments/${id}`, {
-      // converting an object to a string
       body: JSON.stringify(updatedTree),
-      // specify the info being sent in JSON and the info returning should be JSON
       headers: {
         "Content-Type": "application/json"
       },
@@ -63,10 +56,6 @@ class App extends Component{
     .then(response => response.json())
     .then(payload => this.readTreeHouse())
     .catch(errors => console.log("TreeHouse update errors:", errors))
-  }
-
-  deleteTreeHouse = (treeId) => {
-    console.log("Treehouse has been deleted", treeId)
   }
 
   deleteTreeHouse = (id) => {
@@ -85,25 +74,30 @@ class App extends Component{
     console.log(this.state.apartments)
     return (
       <>
-
-        <Router>
-          
+        <Router>          
           <Switch>
+            
             <Route exact path="/" component={Home} />
 
-            <Route path="/apartmentindex" render={(props) => {
+            <Route 
+              path="/apartmentindex" 
+              render={(props) => {
                 let apartments = this.state.apartments
-              return <ApartmentIndex apartments={apartments} current_user={this.props.current_user}/>
-            }} />
+                return <ApartmentIndex apartments={apartments} current_user={this.props.current_user}/>
+              }} 
+            />
 
-            <Route path="/apartmentshow/:id" render={(props) => {
-              let id = props.match.params.id
-              let apartment = this.state.apartments.find(apartment => apartment.id === +id)
-              return <ApartmentShow apartment={apartment} deleteTreeHouse={this.deleteTreeHouse}/>
-            }} />
+            <Route 
+              path="/apartmentshow/:id" 
+              render={(props) => {
+                let id = props.match.params.id
+                let apartment = this.state.apartments.find(apartment => apartment.id === +id)
+                return <ApartmentShow apartment={apartment} deleteTreeHouse={this.deleteTreeHouse}/>
+              }} 
+            />
             
             <Route
-              path="/apartmentnew"
+              path="/apartmentnew" 
               render={(props) => <ApartmentNew createTreeHouse={this.createTreeHouse} current_user={this.props.current_user}/>}
             />
 
@@ -120,12 +114,9 @@ class App extends Component{
 
           </Switch>
           <br/>
-
           <Footer />
-        </Router>
-        
-      </>
-  
+        </Router>  
+      </>  
     )
   }
 }
